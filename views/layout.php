@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="build/css/app.css">
 </head>
 <body>
-
-    <?php echo $contenido; ?>
+    <div class="contendor-app">
+        <div class="imagen"></div>
+        <div class="app">
+            <?php echo $contenido; ?>
+        </div>
+    </div>
 
 </body>
 </html>

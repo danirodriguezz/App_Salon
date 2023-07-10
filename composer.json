@@ -1,0 +1,19 @@
+{
+    "name": "daniel/app-salon_php_mvc_js_sass",
+    "description": "Proyecto PHP8 MVC SQL SASS GULP",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Rodriguez",
+            "email": "danielrodriguezalonso02@gmail.com"
+        }
+    ],
+    "require": {}
+}

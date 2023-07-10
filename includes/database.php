@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', '', 'AppSalon');
+$db = mysqli_connect('localhost', 'root', '', '');
 
 
 if (!$db) {
