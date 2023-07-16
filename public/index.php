@@ -19,7 +19,8 @@ $router->get("/recuperar", [LoginController::class, "recuperar"]);
 $router->post("/recuperar", [LoginController::class, "recuperar"]);
 // Crear Cuenta 
 $router->get("/crear-cuenta", [LoginController::class, "crear"]);
-$router->post("/crear-cuenta ", [LoginController::class, "crear"]);
+$router->post("/crear-cuenta", [LoginController::class, "crear"]);
+
 
 
 
