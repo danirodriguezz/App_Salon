@@ -53,6 +53,23 @@ class Usuario extends ActiveRecord {
         }
         return self::$alertas;
     }
+    //Validamos que exista el email
+    public function validarEmail() {
+        if(!$this->email) {
+            self::$alertas["error"][] = "El Email es obligatorio";
+        }
+        return self::$alertas;
+    }
+    //Validamos que el pasword cumpla unas condiciones
+    public function validarPassword($password) {
+        if(!$this->password || strlen($this->password) < 6) {
+            self::$alertas["error"][] = "Debe introducir un password seguro";
+        }
+        if(password_verify($this->password, $password)) {
+            self::$alertas["error"][] = "No puedes Introducir la Contraseña Actual";
+        }
+        return self::$alertas;
+    }    
     //Revisa si el usuario ya exite
     public function existeUsuario() {
         $query = "SELECT * FROM ". self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
@@ -62,17 +79,14 @@ class Usuario extends ActiveRecord {
         }
         return $resultado;
     }
-
     //Hashea el password
     public function hashPassword() {
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }
-
     //Creamos un token unico
     public function crearToken() {
         $this->token = uniqid();
     }
-
     //Comprobamos el passsword y comprobamos si esta verificado
     public function comprobarPasswordAndVerificado($password) {
         $resultado = password_verify($password, $this->password);
@@ -80,6 +94,14 @@ class Usuario extends ActiveRecord {
             self::$alertas["error"][] = "Usuario o contraseña invalidos o no has confirmado tu cuenta";
         } else {
             return true;
+        }
+    }
+    // Transformamos el token en null por si algun usuario ha pedidio restaurar su contraseña pero se ha acordado
+    // antes de cambiarla y asi tenemos mas seguridad 
+    public function nullToken() {
+        if($this->token !== "") {
+            $this->token = null;
+            $this->guardar();
         }
     }
 
