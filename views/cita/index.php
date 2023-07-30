@@ -10,7 +10,7 @@
     <div class="seccion mostrar" id="paso-1">
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuacion</p>
-        <div id="servicio" class="listado-servicio"></div>
+        <div id="servicios" class="listado-servicios"></div>
     </div>
     <div class="seccion ocultar" id="paso-2">
         <h2>Tus Datos y Cita</h2>  
@@ -31,6 +31,7 @@
                 <input 
                     type="date"
                     id="fecha"
+                    min="<?php echo date("Y-m-d", strtotime("+1 day"));  ?>"
                 />
             </div>
             <div class="campo">
@@ -42,7 +43,7 @@
             </div>
         </form>
     </div>
-    <div class="seccion ocultar" id="paso-3">
+    <div class="seccion ocultar contenido-resumen" id="paso-3">
         <h2>Resumen</h2>
         <p class="text-center">Verifica que la informacion sea correcta</p>
     </div>
