@@ -4,6 +4,7 @@ const pasoInicial = 1;
 const pasoFinal = 3;
 
 const cita = {
+    id: "",
     nombre: "",
     fecha: "",
     hora: "",
@@ -22,6 +23,7 @@ function iniciarApp() {
 
     consultarAPI() //Consulta la API en el backend de PHP
 
+    idCliente() //Consultamos el id y se lo añadimos a la variable de cita
     nombreCliente(); // Añade el nombre del cliente
     selecionarFecha(); //Añadimos la fecha que eliga el cliente
     selecionarHora(); //Añadimos la hora que eliga el cliente
@@ -157,6 +159,12 @@ function selecionarServicio(servicio) {
     }
 }
 
+function idCliente() {
+    const id = document.getElementById("id").value;
+    cita.id = id;
+    // console.log(cita);
+}
+
 function nombreCliente() {
     const nombre = document.querySelector("#nombre").value;
     cita.nombre = nombre;
@@ -267,7 +275,7 @@ function mostrarResumen() {
 
     const opciones = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
     const fechaFormateada = fechaUTC.toLocaleDateString("es-ES", opciones);
-    console.log(cita);
+    // console.log(cita);
 
     const fechaCita = document.createElement("P");
     fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
@@ -287,6 +295,52 @@ function mostrarResumen() {
     resumen.appendChild(botonReservar);
 }
 
-function reservarCita() {
-    console.log("Reservando cita .....");
+async function reservarCita() {
+    //Realizamos destructuring al objeto de cita
+    const {id, nombre, fecha, hora, servicios} = cita;
+    //guardamos en una variable todos los id de los servicios que se hayan selecionado
+    const idServicios = servicios.map(servicio => servicio.id);
+    //Creamos un nuevo objeto de FormData para llenarlo de datos y enviarlo con fetch a la API
+    const datos = new FormData();
+    datos.append("usuario_id", id);
+    datos.append("fecha", fecha);
+    datos.append("hora", hora);
+    datos.append("servicios", idServicios);
+    // console.log([...datos]);
+    try {
+        //Peticion hacia la API 
+        const url = "http://localhost:8000/api/citas";
+        const respuesta = await fetch(url, {
+            method: "POST",
+            body: datos
+        });
+
+        const resultado = await respuesta.json();
+        if(resultado.resultado) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Cita Creada',
+                text: 'Tu cita se ha creado correctamente',
+                customClass: {
+                    popup: "custom-popup",
+                    confirmButton: 'custom-button'
+                }
+            }).then(() => {
+                window.location.reload();
+            });
+        };    
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo ha salido mal intentalo mas tarde',
+            customClass: {
+                popup: "custom-popup",
+                confirmButton: 'custom-button'
+            }
+        }).then(() => {
+            window.location.reload();
+        });
+    }
+    
 }

@@ -41,6 +41,7 @@
                     id="hora"
                 />
             </div>
+            <input type="hidden" id="id" value="<?php  echo $id ?>">
         </form>
     </div>
     <div class="seccion ocultar contenido-resumen" id="paso-3">
@@ -54,5 +55,8 @@
 </div>
 
 <?php 
-    $script = "<script src='/build/js/app.js'></script>";
+    $script = "
+        <script src='/build/js/app.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    ";
 ?>
