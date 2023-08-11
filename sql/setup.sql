@@ -51,3 +51,11 @@ CREATE TABLE citasServicios (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+-- Utilizamos los Join para unir la informacion que quiero traerme de la base de datos
+SELECT citas.id, citas.hora, CONCAT(usuarios.nombre, ' ', usuarios.apellido) as cliente,
+usuarios.email, usuarios.telefono, servicios.nombre as servicio, servicios.precio
+FROM citas 
+LEFT OUTER JOIN usuarios ON citas.usuario_id=usuarios.id 
+LEFT OUTER JOIN citasServicios ON citasServicios.cita_id=citas.id 
+LEFT OUTER JOIN servicios ON servicios.id=citasServicios.servicio_id;

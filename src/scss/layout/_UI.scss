@@ -16,12 +16,53 @@
             height: 20rem;
         }
         @include m.tablet {
-            height: auto;
+            height: 100%;
         }
+    }
+    .centrar {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .app {
         width: 95%;
-        margin: auto auto;
+        margin: 0 auto;
         padding: 3rem 0;
+        @include m.tablet {
+            overflow: scroll;
+            overflow-x: hidden;
+            &::-webkit-scrollbar {
+                width: 0;
+                background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: v.$rojo;
+            }
+        }
+    }
+}
+
+.barra {
+    margin: 0 0 v.$separacion 0;
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .boton {
+        @include m.boton(v.$negro, v.$blanco);
+        margin: 0;
+    }
+}
+
+.barra-servicios {
+    margin-bottom: v.$separacion;
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;
+    }
+    .boton {
+        margin: 0 0 1rem 0;
     }
 }

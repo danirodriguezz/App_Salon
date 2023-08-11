@@ -123,6 +123,14 @@ class ActiveRecord {
         return array_shift( $resultado ) ;
     }
 
+    //Consulta Plana de SQL (Utilizar cuando los metodos del modelo no son suficientes)
+    public static function SQL($consulta) {
+        $query = $consulta;
+        $resultado = self::consultarSQL($query);
+        //En el return no utilizamos el array_shift() por que queremos que devuelva un array con varios elementos, no el primer elemento nada mas   
+        return $resultado;
+    }
+
     // Obtener Registros con cierta cantidad
     public static function get($limite) {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";

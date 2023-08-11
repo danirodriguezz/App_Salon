@@ -1,10 +1,9 @@
 <?php
 namespace Controllers;
 
-use Model\ActiveRecord;
 use MVC\Router;
 
-class CitaController extends ActiveRecord {
+class CitaController {
     public static function index(Router $router) {
         session_start();
         isAuth();
