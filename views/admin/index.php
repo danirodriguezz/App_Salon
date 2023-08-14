@@ -1,4 +1,5 @@
 <h1 class="nombre-pagina">Panel de Administracion</h1>
+<p class="descripcion-pagina">Busca las citas utilizando la fecha</p>
 <?php 
     include_once __DIR__ . "/../templates/barra.php";
 ?> 
@@ -41,13 +42,13 @@
             <?php $idCita = $cita->id; ?>
             <?php endif ?>
             <?php $total += $cita->precio;?>
-                <p class="servicio"><?php echo $cita->servicio . " " . $cita->precio?></p>
+                <p class="servicio"><?php echo $cita->servicio . " " . $cita->precio?> &euro;</p>
             <?php 
                 $actual = $cita->id;
                 $proximo = $citas[$key + 1]->id ?? 0;
             ?>
             <?php if(esUltimo($actual, $proximo)): ?>
-                <p class="total">Total: <span><?php echo $total ?></span></p>
+                <p class="total">Total: <span><?php echo $total ?> &euro;</span></p>
                 <form action="/api/eliminar" method="POST">
                     <input type="hidden" name="id" value="<?php echo $cita->id ?>">
                     <input type="submit" class="boton-eliminar" value="Eliminar">

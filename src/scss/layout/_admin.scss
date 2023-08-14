@@ -16,5 +16,14 @@
             color: v.$blanco;
         }
     }
+}
 
+.servicios {
+    @extend .citas;
+    .acciones {
+        margin: 0;
+        .boton, .boton-eliminar {
+            margin: 1rem 0 0 0;
+        }
+    }
 }

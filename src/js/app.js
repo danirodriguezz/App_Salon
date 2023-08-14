@@ -342,5 +342,4 @@ async function reservarCita() {
             window.location.reload();
         });
     }
-    
 }
