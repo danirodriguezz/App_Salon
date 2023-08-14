@@ -103,7 +103,7 @@ function paginaAnterior() {
 async function consultarAPI() {
     try {
         //Obtenemos los datos de una api que se conecta con la base de datos
-        const url = "http://localhost:8000/api/servicios";
+        const url = "/api/servicios";
         const resultado = await fetch(url);
         const servicios = await resultado.json();
         //LLamamos a la funcion de mostrarServicios y le pasamos los servicios en formato json
@@ -309,7 +309,7 @@ async function reservarCita() {
     // console.log([...datos]);
     try {
         //Peticion hacia la API 
-        const url = "http://localhost:8000/api/citas";
+        const url = "/api/citas";
         const respuesta = await fetch(url, {
             method: "POST",
             body: datos
